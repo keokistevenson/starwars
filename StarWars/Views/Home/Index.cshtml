@@ -1,8 +1,19 @@
-﻿@{
+﻿@model Starship
+
+@{
     ViewData["Title"] = "Star Wars";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1>Starship Details</h1>
+
+    <p><strong>Name:</strong> @Model.Name</p>
+    <p><strong>Model:</strong> @Model.Model</p>
+    <p><strong>Manufacturer:</strong> @Model.Manufacturer</p>
+    <p><strong>Cost in Credits:</strong> @Model.Cost_in_credits</p>
+    <p><strong>Crew:</strong> @Model.Crew</p>
+    <p><strong>Passengers:</strong> @Model.Passengers</p>
+    <p><strong>Starship Class:</strong> @Model.Starship_class</p>
     
 </div>
+

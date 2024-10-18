@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using StarWars.Models;
+using System;
 using System.Diagnostics;
+using System.Net.Http;
 
 namespace StarWars.Controllers
 {
@@ -15,7 +17,21 @@ namespace StarWars.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            int[] starshipIds = [2, 3, 5,9,10,11,12,13,15,17];
+            Random random = new Random();
+
+            // Get a random index from the array
+            int randomIndex = random.Next(0, starshipIds.Length);
+
+            // api
+            using HttpClient client = new HttpClient();
+
+            // Send GET request and deserialize the response into the Starship object
+            string url = "https://swapi.dev/api/starships/" + starshipIds[randomIndex];
+            Starship starship = client.GetFromJsonAsync<Starship>(url).Result;
+
+
+            return View(starship);
         }
 
         public IActionResult Privacy()
