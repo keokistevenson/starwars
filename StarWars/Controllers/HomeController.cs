@@ -15,6 +15,7 @@ namespace StarWars.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             int[] starshipIds = [2, 3, 5,9,10,11,12,13,15,17];
@@ -34,6 +35,21 @@ namespace StarWars.Controllers
             return View(starship);
         }
 
+        [HttpPost]
+        public IActionResult SubmitForm(string selectedOption, IFormFile uploadedFile)
+        {
+            if (uploadedFile != null && uploadedFile.Length > 0)
+            {
+                // Handle file upload logic
+                // For example, save the file to a directory, etc.
+            }
+
+            ViewBag.SelectedOption = selectedOption;
+            return View("Index");
+
+        }
+
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();
