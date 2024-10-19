@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using StarWars.Data;
+
 namespace StarWars
 {
     public class Program
@@ -9,7 +12,16 @@ namespace StarWars
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                dbContext.Database.EnsureCreated(); // This will create the database if it doesn’t exist
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
