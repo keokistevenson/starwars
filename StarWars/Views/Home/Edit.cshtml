@@ -1,0 +1,27 @@
+﻿@model StarShipImage
+
+<h2>Edit Starship Image</h2>
+
+<div>
+    <p><strong>Current Image:</strong></p>
+    @if (!string.IsNullOrEmpty(Model.Image))
+    {
+        <img src="@Model.Image" alt="@Model.Name" style="width:200px; height:auto;" />
+    }
+    else
+    {
+        <p>No image available.</p>
+    }
+</div>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="form-group">
+        <label for="uploadedFile">Upload New Image</label>
+        <input type="file" name="uploadedFile" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Image</button>
+    <a href="/Home/Index" class="btn btn-secondary">Cancel</a>
+</form>

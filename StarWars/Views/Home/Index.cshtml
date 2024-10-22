@@ -1,43 +1,28 @@
-﻿@model StarshipViewModel
+﻿@model List<StarShipImage>
 
-@{
-    ViewData["Title"] = "Star Wars";
-}
+<h2>All Starship Images</h2>
 
-<div class="text-center">
-    <h1>Random Starship Details</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var starship in Model)
+        {
+            <tr>
+                <td>@starship.Name</td>
+                <td><img src="@starship.Image" alt="@starship.Name" style="width:100px;" /></td>
+                <td>
+                    <a href="/Home/Edit/@starship.Id" class="btn btn-warning">Edit</a>
+                    <a href="/Home/Delete/@starship.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-    @if (!string.IsNullOrEmpty(Model.StarshipImagePath))
-    {
-        <img src="@Model.StarshipImagePath" alt="Starship Image" style="width: 300px; height: auto;" />
-    }
-
-    <p><strong>Name:</strong> @Model.RandomStarship.Name</p>
-    <p><strong>Model:</strong> @Model.RandomStarship.Model</p>
-    <p><strong>Manufacturer:</strong> @Model.RandomStarship.Manufacturer</p>
-    <p><strong>Cost in Credits:</strong> @Model.RandomStarship.CostInCredits</p>
-    <p><strong>Crew:</strong> @Model.RandomStarship.Crew</p>
-    <p><strong>Passengers:</strong> @Model.RandomStarship.Passengers</p>
-    <p><strong>Starship Class:</strong> @Model.RandomStarship.StarshipClass</p>
-</div>
-
-<hr />
-
-<div>
-    <form action="/Home/SubmitForm" method="post" enctype="multipart/form-data">
-        <select name="selectedOption" class="form-control">
-            @foreach (var starship in Model.StarshipList)
-            {
-                <option value="@starship.StarShipId">@starship.Name</option>
-            }
-        </select>
-
-        <br />
-
-        <input type="file" name="uploadedFile" />
-
-        <br /><br />
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+<a href="/Home/Create" class="btn btn-primary">Add New Starship</a>

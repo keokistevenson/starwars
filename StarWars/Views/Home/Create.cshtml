@@ -1,0 +1,35 @@
+﻿@model List<SelectStarship>
+
+<h2>Create Starship</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="StarShipId">Select Starship</label>
+        <select id="starShipSelect" name="StarShipId" class="form-control" required>
+            <option value="">-- Select a Starship --</option>
+            @foreach (var starship in Model)
+            {
+                <option value="@starship.StarShipId" data-name="@starship.Name">@starship.Name</option>
+            }
+        </select>
+    </div>
+
+    <!-- Hidden input field to store the selected starship name -->
+    <input type="hidden" id="Name" name="Name" />
+
+    <div class="form-group">
+        <label for="uploadedFile">Upload Image</label>
+        <input type="file" name="uploadedFile" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<script>
+    // JavaScript to update the hidden Name input on dropdown change
+    document.getElementById('starShipSelect').addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const starshipName = selectedOption.getAttribute('data-name');
+        document.getElementById('Name').value = starshipName;
+    });
+</script>

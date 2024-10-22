@@ -1,0 +1,11 @@
+﻿@model StarShipImage
+
+<h2>Delete Starship</h2>
+
+<p>Are you sure you want to delete the starship <strong>@Model.Name</strong>?</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="/Home/Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -2,7 +2,7 @@
 {
     public class StarshipViewModel
     {
-        public Starship RandomStarship { get; set; }
+        public List<StarShipImage> StarShipImages { get; set; }
         public List<SelectStarship> StarshipList { get; set; }
         public string StarshipImagePath { get; set; }
     }
