@@ -2,7 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/StarWars/wwwroot
 /StarWars/Properties
 /StarWars/obj
 /StarWars/bin/Debug/net8.0
