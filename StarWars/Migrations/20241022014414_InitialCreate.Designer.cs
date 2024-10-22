@@ -11,8 +11,8 @@ using StarWars.Data;
 namespace StarWars.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241019002747_initialcreate")]
-    partial class Initialcreate
+    [Migration("20241022014414_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,8 +26,11 @@ namespace StarWars.Migrations
 
             modelBuilder.Entity("StarWars.Models.StarShipImage", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Image")
                         .IsRequired()
