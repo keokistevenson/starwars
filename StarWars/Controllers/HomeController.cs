@@ -1,52 +1,131 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using StarWars.Data;
 using StarWars.Models;
 using System;
 using System.Diagnostics;
 using System.Net.Http;
+using Microsoft.AspNetCore.Http;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq; // Install Newtonsoft.Json package
+using System.Collections.Generic;
+using System.IO;
 
 namespace StarWars.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            int[] starshipIds = [2, 3, 5,9,10,11,12,13,15,17];
-            Random random = new Random();
+            List<SelectStarship> starships = await FetchStarships();
 
-            // Get a random index from the array
-            int randomIndex = random.Next(0, starshipIds.Length);
+            var randomStarship = await GetStarships(starships[new Random().Next(starships.Count)].StarShipId);
 
-            // api
-            using HttpClient client = new HttpClient();
+            // Pass both the random starship and the list of starships to the view
+            var model = new StarshipViewModel
+            {
+                RandomStarship = randomStarship,
+                StarshipList = starships
+            };
 
-            // Send GET request and deserialize the response into the Starship object
-            string url = "https://swapi.dev/api/starships/" + starshipIds[randomIndex];
-            Starship starship = client.GetFromJsonAsync<Starship>(url).Result;
+            return View(model);
+        }
 
+        private async Task<List<SelectStarship>> FetchStarships()
+        {
+            List<SelectStarship> starships = new List<SelectStarship>();
 
-            return View(starship);
+            using (HttpClient client = new HttpClient())
+            {
+                string url = "https://swapi.dev/api/starships";
+                var response = await client.GetStringAsync(url);
+
+                JObject jsonResponse = JObject.Parse(response);
+                var results = jsonResponse["results"];
+
+                foreach (var item in results)
+                {
+                    starships.Add(new SelectStarship
+                    {
+                        StarShipId = item["url"].ToString().Split('/')[^2],
+                        Name = item["name"].ToString()
+                    });
+                }
+            }
+            return starships;
+        }
+
+        private async Task<Starship> GetStarships(string id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string url = $"https://swapi.dev/api/starships/{id}/";
+                var response = await client.GetStringAsync(url);
+
+                JObject jsonResponse = JObject.Parse(response);
+                return new Starship
+                {
+                    Name = jsonResponse["name"].ToString(),
+                    Model = jsonResponse["model"].ToString(),
+                    Manufacturer = jsonResponse["manufacturer"].ToString(),
+                    CostInCredits = jsonResponse["cost_in_credits"].ToString(),
+                    Crew = jsonResponse["crew"].ToString(),
+                    Passengers = jsonResponse["passengers"].ToString(),
+                    StarshipClass = jsonResponse["starship_class"].ToString()
+                };
+            }
         }
 
         [HttpPost]
-        public IActionResult SubmitForm(string selectedOption, IFormFile uploadedFile)
+        public async Task<IActionResult> SubmitForm(string selectedOption, IFormFile uploadedFile)
         {
-            if (uploadedFile != null && uploadedFile.Length > 0)
+            string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+
+            if (!Directory.Exists(uploadPath))
             {
-                // Handle file upload logic
-                // For example, save the file to a directory, etc.
+                Directory.CreateDirectory(uploadPath);
             }
 
-            ViewBag.SelectedOption = selectedOption;
-            return View("Index");
+            string fileName = Path.GetFileName(uploadedFile.FileName);
+            string filePath = Path.Combine(uploadPath, fileName);
 
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await uploadedFile.CopyToAsync(stream);
+            }
+
+            // Save starship data and image path to the database
+            var starship = new StarShipImage
+            {
+                StarShipId = selectedOption,
+                Name = await GetStarshipName(selectedOption),
+                Image = $"/images/{fileName}"
+            };
+
+            _context.StarShipImage.Add(starship);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        private async Task<string> GetStarshipName(string id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string url = $"https://swapi.dev/api/starships/{id}/";
+                var response = await client.GetStringAsync(url);
+                JObject jsonResponse = JObject.Parse(response);
+                return jsonResponse["name"].ToString();
+            }
         }
 
         [HttpGet]

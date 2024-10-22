@@ -1,29 +1,30 @@
-﻿@model Starship
+﻿@model StarshipViewModel
 
 @{
     ViewData["Title"] = "Star Wars";
 }
 
 <div class="text-center">
-    <h1>Starship Details</h1>
+    <h1>Random Starship Details</h1>
 
-    <p><strong>Name:</strong> @Model.Name</p>
-    <p><strong>Model:</strong> @Model.Model</p>
-    <p><strong>Manufacturer:</strong> @Model.Manufacturer</p>
-    <p><strong>Cost in Credits:</strong> @Model.Cost_in_credits</p>
-    <p><strong>Crew:</strong> @Model.Crew</p>
-    <p><strong>Passengers:</strong> @Model.Passengers</p>
-    <p><strong>Starship Class:</strong> @Model.Starship_class</p>
-    
+    <p><strong>Name:</strong> @Model.RandomStarship.Name</p>
+    <p><strong>Model:</strong> @Model.RandomStarship.Model</p>
+    <p><strong>Manufacturer:</strong> @Model.RandomStarship.Manufacturer</p>
+    <p><strong>Cost in Credits:</strong> @Model.RandomStarship.CostInCredits</p>
+    <p><strong>Crew:</strong> @Model.RandomStarship.Crew</p>
+    <p><strong>Passengers:</strong> @Model.RandomStarship.Passengers</p>
+    <p><strong>Starship Class:</strong> @Model.RandomStarship.StarshipClass</p>
 </div>
+
+<hr />
 
 <div>
     <form action="/Home/SubmitForm" method="post" enctype="multipart/form-data">
         <select name="selectedOption" class="form-control">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+            @foreach (var starship in Model.StarshipList)
+            {
+                <option value="@starship.StarShipId">@starship.Name</option>
+            }
         </select>
 
         <br />
