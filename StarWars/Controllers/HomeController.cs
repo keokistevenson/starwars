@@ -28,13 +28,18 @@ namespace StarWars.Controllers
         {
             List<SelectStarship> starships = await FetchStarships();
 
+            var randomStarshipImage = await _context.StarShipImage
+            .OrderBy(r => EF.Functions.Random())
+            .FirstOrDefaultAsync();
+
             var randomStarship = await GetStarships(starships[new Random().Next(starships.Count)].StarShipId);
 
             // Pass both the random starship and the list of starships to the view
             var model = new StarshipViewModel
             {
                 RandomStarship = randomStarship,
-                StarshipList = starships
+                StarshipList = starships,
+                StarshipImagePath = randomStarshipImage?.Image
             };
 
             return View(model);

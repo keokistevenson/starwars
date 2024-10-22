@@ -7,6 +7,11 @@
 <div class="text-center">
     <h1>Random Starship Details</h1>
 
+    @if (!string.IsNullOrEmpty(Model.StarshipImagePath))
+    {
+        <img src="@Model.StarshipImagePath" alt="Starship Image" style="width: 300px; height: auto;" />
+    }
+
     <p><strong>Name:</strong> @Model.RandomStarship.Name</p>
     <p><strong>Model:</strong> @Model.RandomStarship.Model</p>
     <p><strong>Manufacturer:</strong> @Model.RandomStarship.Manufacturer</p>
