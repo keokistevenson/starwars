@@ -1,21 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StarWars.Models;
-
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Threading.Tasks;
 namespace StarWars.Data
 {
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options) { }
+        : base(options) { }
 
-        // Add DbSet for each table
         public DbSet<StarShipImage> StarShipImage { get; set; }
 
-        // Optional: Override OnConfiguring if not using Dependency Injection
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Your_Connection_String");
-        //}
-    }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
 
+    }
 }
