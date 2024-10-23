@@ -50,12 +50,6 @@ Create a folder called SeedImages in the project root and add:
 - 01.png
 - 02.png
 
-### 5. Run the App
-```bash
-dotnet run
-```
-Open the app at http://localhost:5000.
-
 ### How It Works
 View Starships: See all stored starships on the home page.
 Add New Starship: Go to /Home/Create and select a starship from the API, upload an image, and save.
