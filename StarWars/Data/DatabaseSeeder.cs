@@ -11,7 +11,7 @@ namespace StarWars.Data
     {
         public static async Task SeedAsync(ApplicationDbContext context)
         {
-            if (await context.StarShipImage.AnyAsync())
+            if (await context.StarshipImage.AnyAsync())
                 return;  
 
             using (HttpClient client = new HttpClient())
@@ -22,21 +22,21 @@ namespace StarWars.Data
                 var starship1 = JObject.Parse(response1);
                 var starship2 = JObject.Parse(response2);
 
-                var starshipImage1 = new StarShipImage
+                var starshipImage1 = new StarshipImage
                 {
-                    StarShipId = "2",
+                    StarshipId = "2",
                     Name = starship1["name"].ToString(),
                     Image = CopyImageToLocal("01.png")
                 };
 
-                var starshipImage2 = new StarShipImage
+                var starshipImage2 = new StarshipImage
                 {
-                    StarShipId = "3",
+                    StarshipId = "3",
                     Name = starship2["name"].ToString(),
                     Image = CopyImageToLocal("02.png")
                 };
 
-                context.StarShipImage.AddRange(starshipImage1, starshipImage2);
+                context.StarshipImage.AddRange(starshipImage1, starshipImage2);
                 await context.SaveChangesAsync();
             }
         }

@@ -19,8 +19,8 @@ namespace StarWars.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var starShipImages = await _context.StarShipImage.ToListAsync();
-            return View(starShipImages);
+            var starshipImages = await _context.StarshipImage.ToListAsync();
+            return View(starshipImages);
         }
 
         [HttpGet]
@@ -33,8 +33,8 @@ namespace StarWars.Controllers
         private async Task<List<SelectStarship>> GetAvailableStarships()
         {
             // Get all StarshipIds that are already in the database
-            var existingStarshipIds = await _context.StarShipImage
-                .Select(s => s.StarShipId)
+            var existingStarshipIds = await _context.StarshipImage
+                .Select(s => s.StarshipId)
                 .ToListAsync();
 
             List<SelectStarship> allStarships = new List<SelectStarship>();
@@ -55,7 +55,7 @@ namespace StarWars.Controllers
                     {
                         allStarships.Add(new SelectStarship
                         {
-                            StarShipId = starshipId,
+                            StarshipId = starshipId,
                             Name = item["name"].ToString()
                         });
                     }
@@ -66,7 +66,7 @@ namespace StarWars.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(StarShipImage model, IFormFile uploadedFile)
+        public async Task<IActionResult> Create(StarshipImage model, IFormFile uploadedFile)
         {
             if (uploadedFile != null)
             {
@@ -88,7 +88,7 @@ namespace StarWars.Controllers
                 model.Image = $"/images/{fileName}";
             }
 
-            _context.StarShipImage.Add(model);
+            _context.StarshipImage.Add(model);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -97,7 +97,7 @@ namespace StarWars.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var starship = await _context.StarShipImage.FindAsync(id);
+            var starship = await _context.StarshipImage.FindAsync(id);
             if (starship == null)
             {
                 return NotFound();
@@ -108,7 +108,7 @@ namespace StarWars.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, IFormFile uploadedFile)
         {
-            var starship = await _context.StarShipImage.FindAsync(id);
+            var starship = await _context.StarshipImage.FindAsync(id);
             if (starship == null)
             {
                 return NotFound();
@@ -152,7 +152,7 @@ namespace StarWars.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var starship = await _context.StarShipImage.FindAsync(id);
+            var starship = await _context.StarshipImage.FindAsync(id);
             if (starship == null)
             {
                 return NotFound();
@@ -164,10 +164,10 @@ namespace StarWars.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var starship = await _context.StarShipImage.FindAsync(id);
+            var starship = await _context.StarshipImage.FindAsync(id);
             if (starship != null)
             {
-                _context.StarShipImage.Remove(starship);
+                _context.StarshipImage.Remove(starship);
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("Index");

@@ -11,7 +11,7 @@ namespace StarWars.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options) { }
 
-        public DbSet<StarShipImage> StarShipImage { get; set; }
+        public DbSet<StarshipImage> StarshipImage { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

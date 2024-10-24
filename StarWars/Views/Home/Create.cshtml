@@ -4,12 +4,12 @@
 
 <form asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="form-group">
-        <label for="StarShipId">Select Starship</label>
-        <select id="starShipSelect" name="StarShipId" class="form-control" required>
+        <label for="StarshipId">Select Starship</label>
+        <select id="starshipSelect" name="StarshipId" class="form-control" required>
             <option value="">-- Select a Starship --</option>
             @foreach (var starship in Model)
             {
-                <option value="@starship.StarShipId" data-name="@starship.Name">@starship.Name</option>
+                <option value="@starship.StarshipId" data-name="@starship.Name">@starship.Name</option>
             }
         </select>
     </div>
@@ -27,7 +27,7 @@
 
 <script>
     // JavaScript to update the hidden Name input on dropdown change
-    document.getElementById('starShipSelect').addEventListener('change', function () {
+    document.getElementById('starshipSelect').addEventListener('change', function () {
         const selectedOption = this.options[this.selectedIndex];
         const starshipName = selectedOption.getAttribute('data-name');
         document.getElementById('Name').value = starshipName;

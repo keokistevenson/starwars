@@ -2,7 +2,7 @@
 {
     public class SelectStarship
     {
-        public string StarShipId { get; set; }
+        public string StarshipId { get; set; }
         public string Name { get; set; }
     }
 }
