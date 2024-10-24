@@ -1,0 +1,97 @@
+﻿body {
+    background-image: url('/images/showroom.png');
+    background-size: cover;
+    background-attachment: fixed;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.page-title {
+    text-align: center;
+    font-family: 'Star Jedi', sans-serif;
+    font-size: 48px;
+    margin-bottom: 40px;
+    color: #1e90ff;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 0, 0, 0.85), 0 0 45px rgba(0, 0, 0, 1);
+}
+
+.table-container {
+    max-width: 800px;
+    margin: auto;
+    background: rgba(173, 216, 230, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+    .styled-table th,
+    .styled-table td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .styled-table th {
+        color: #0e76a8;
+        font-weight: bold;
+    }
+
+.starship-image {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.btn-glow {
+    display: inline-block;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+    .btn-glow:hover {
+        box-shadow: 0 0 15px rgba(30, 144, 255, 0.8);
+    }
+
+.btn-edit {
+    background-color: #5a7d9a;
+    color: white;
+}
+
+    .btn-edit:hover {
+        background-color: #466378;
+        color: white;
+        box-shadow: 0 0 15px rgba(70, 99, 120, 0.8);
+    }
+
+.btn-delete {
+    background-color: #d9534f;
+}
+
+    .btn-delete:hover {
+        background-color: #c9302c;
+    }
+
+.add-starship {
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    text-align: center;
+}
