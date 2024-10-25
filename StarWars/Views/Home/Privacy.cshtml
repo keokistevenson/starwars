@@ -1,6 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Our Privacy Policy";
 }
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/privacy.css" asp-append-version="true" />
+}
+
 <h1>@ViewData["Title"]</h1>
 
 <p>By reading this, you are officially recruited. What you see here stays here! Share it, and... well, let's just say the consequences are classified.</p>
@@ -8,46 +13,3 @@
 <div class="center-wrapper">
     <p class="report-now">You must report to work within 24 hours!</p>
 </div>
-
-<style>
-
-    body {
-        background-image: url('/images/DarkSidePrivacyPolicy.png');
-        background-size: cover;
-        background-attachment: fixed;
-        color: #fff;
-        font-family: 'Open Sans', sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-
-    p {
-        font-size: 25px;
-        margin: 20px 0;
-    }
-
-
-    .center-wrapper {
-        display: flex;
-        justify-content: center; 
-        margin: 20px 0;
-    }
-
-    .report-now {
-        font-size: 25px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        text-shadow: 0 0 10px #ff4c4c, 0 0 20px #ff6347, 0 0 30px rgba(255, 69, 0, 0.8); 
-        font-weight: bold;
-        display: inline-block; 
-        padding: 10px;
-    }
-
-    h1 {
-        text-align: left; 
-        margin-top: 20px;
-        font-size: 48px;
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff;
-    }
-</style>

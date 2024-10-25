@@ -20,3 +20,55 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.star-wars-header {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    padding: 10px 0;
+}
+
+.navbar-dark .navbar-brand {
+    font-family: 'Star Jedi', sans-serif;
+    font-size: 32px;
+    color: #1e90ff;
+    text-shadow: 0 0 10px rgba(30, 144, 255, 0.8), 0 0 20px rgba(30, 144, 255, 0.5);
+}
+
+.navbar-dark .nav-link {
+    font-size: 18px;
+    transition: color 0.3s ease-in-out;
+}
+
+    .navbar-dark .nav-link:hover {
+        color: #1e90ff;
+        text-shadow: 0 0 10px rgba(30, 144, 255, 0.8);
+    }
+
+.star-wars-footer {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+.glowing-text {
+    color: #1e90ff;
+    text-shadow: 0 0 10px rgba(30, 144, 255, 1), 0 0 20px rgba(30, 144, 255, 0.8);
+}
+
+.footer-link {
+    color: #1e90ff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+    .footer-link:hover {
+        color: #0a74da;
+    }

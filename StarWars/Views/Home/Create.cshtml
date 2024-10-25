@@ -1,5 +1,9 @@
 ﻿@model List<SelectStarship>
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/create.css" asp-append-version="true" />
+}
+
 <h2 class="star-wars-title">Starship Factory</h2>
 
 <form asp-action="Create" method="post" enctype="multipart/form-data" class="star-wars-form">
@@ -34,78 +38,3 @@
     });
 </script>
 
-<style>
-    /* Styling My Create Page */
-    body {
-        background-image: url('/images/factory2.png');
-        background-size: cover;
-        background-attachment: fixed;
-        color: #f0f0f0;
-        font-family: 'Open Sans', sans-serif;
-    }
-
-
-    .star-wars-title {
-        text-align: center; 
-        margin-bottom: 20px; 
-        font-family: 'Star Jedi', sans-serif;
-        font-size: 48px;
-        color: #fff;
-        text-shadow: 0 0 20px #1e90ff, 0 0 30px #1e90ff, 0 0 40px #1e90ff; 
-    }
-
-
-    .star-wars-form {
-        max-width: 600px;
-        margin: auto;
-        background: rgba(173, 216, 230, 0.3); 
-        backdrop-filter: blur(15px); 
-        -webkit-backdrop-filter: blur(15px); 
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); 
-        border: 1px solid rgba(255, 255, 255, 0.2); 
-    }
-
-        .star-wars-form label {
-            color: #0e76a8; 
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-
-    .form-control {
-        background-color: rgba(255, 255, 255, 0.5); 
-        color: #0d3b66; 
-        border: 1px solid rgba(0, 123, 255, 0.5); 
-        border-radius: 5px;
-        padding: 10px;
-        margin-bottom: 20px;
-        transition: border-color 0.3s;
-    }
-
-        .form-control:focus {
-            border-color: #1e90ff; 
-            outline: none;
-        }
-
- 
-    .btn-glow {
-        display: inline-block;
-        padding: 10px 20px;
-        margin: 10px 0;
-        border: none;
-        border-radius: 5px;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        background-color: #1e90ff; 
-        transition: box-shadow 0.3s ease-in-out, background-color 0.3s;
-    }
-
-        .btn-glow:hover {
-            box-shadow: 0 0 15px rgba(30, 144, 255, 0.8); 
-            background-color: #0a74da; 
-        }
-</style>
