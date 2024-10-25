@@ -6,6 +6,14 @@
 
 <h2 class="page-title">Starship Showroom</h2>
 
+@{
+    var random = new Random();
+    var randomStarshipImage = Model[random.Next(Model.Count)];
+}
+<div class="random-image-container">
+    <img src="@randomStarshipImage.Image" alt="@randomStarshipImage.Name" class="random-starship-image" />
+</div>
+
 <div class="table-container">
     <table class="styled-table">
         <thead>
